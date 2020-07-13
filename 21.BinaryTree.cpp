@@ -129,3 +129,127 @@ void afterOrder(TreeNode* root){
         s2.pop();
     }
 }
+
+
+
+
+
+
+
+// lianxi
+//
+void preOrder(TreeNode* root){
+    if(root == nullptr)
+        return;
+
+    std::stack<TreeNode*> stack;
+    TreeNode* pNode = root;
+
+    stack.push(root);
+
+    while(!stack.empty()){
+        pNode = stack.top();
+        printf("%d "，pNode->m_nVal);
+        stack.pop();
+
+        if(pNode->m_pRright)
+          stack.push(pNode->m_pRight);
+        if(pNode->m_pLeft)
+          stack.push(pNode->m_pLeft);  
+    }
+}
+
+
+void preOrder(TreeNode* root){
+    std::stack<TreeNode*> stack;
+    TreeNode* pNode = root;
+
+    while(pNode!=nullptr || !stack.empty()){
+        if(pNode!=nullptr){
+            printf("%d ",pNode->m_nVal);
+            stack.push(pNode);
+            pNode = pNode->m_pLeft;
+        }
+        else{
+            pNode = stack.top();
+            stack.pop();
+            pNode = pNode->m_pRight;
+        }
+    }
+
+}
+
+void inOrder(TreeNode* root){
+    std::stack<TreeNode*> stack;
+    TreeNode* pNode = root;
+
+    while(pNode != nullptr || !stack.empty()){
+        if(pNode != nullptr){
+            stack.push(pNode);
+            pNode = pNode->m_pLeft;
+        }
+        else{
+            pNode = stack.top();
+            stack.pop();
+            printf("%d ",pNode->m_nVal);
+            pNode = pNode->m_pRight;
+        }
+    }
+}
+
+void afterOrder(TreeNode* root){
+    if(root == nullptr)
+        return;
+
+    std::stack<TreeNode*> stack;
+    TreeNode* pNode = root;
+    TreeNode* pre = root;
+
+    stack.push(root);
+
+    while(!stack.empty()){
+        pNode = stack.top();
+
+        if( (pNode->m_pLeft==nullptr && pNode->m_pRight==nullptr) || (pNode->m_pLeft==pre || pNode->m_pRight==pre)  )
+        {
+            printf("%d ",pNode->m_nVal);
+            stack.pop();
+            pre = pNode;
+        }
+        else
+        {
+            if(pNode->m_pRight)
+                stack.push(pNode->m_pRight);
+            if(pNode->m_pLeft)
+                stack.push(pNode->m_pLeft);
+        }
+    }
+}
+
+void afterOrder(TreeNode* root){
+    if(root==nullptr)
+        return;
+
+    std::stack<TreeNode*> stack1;
+    std::stack<TreeNode*> stack2;
+    TreeNode* pNode = nullptr;
+    stack1.push(root);
+
+    while(!stack1.empty()){
+        pNode = stack1.top();
+        stack1.pop();
+        stack2.push(pNode);
+
+        if(pNode->m_pLeft)
+            stack1.push(pNode->m_pLeft);
+        if(pNode=>m_pRight)
+            stack1.push(pNode->mpRight); 
+    }
+
+    while(!stack2.empty())
+    {
+        pNode = stack2.top();
+        printf("%d ",pNode->m_nVal);
+        stack2.pop();
+    }
+}
